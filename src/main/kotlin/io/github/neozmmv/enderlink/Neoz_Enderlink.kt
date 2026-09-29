@@ -1,4 +1,4 @@
-package com.neoz_enderlink
+package io.github.neozmmv.enderlink
 
 import net.fabricmc.api.ModInitializer
 import net.minecraft.resources.Identifier

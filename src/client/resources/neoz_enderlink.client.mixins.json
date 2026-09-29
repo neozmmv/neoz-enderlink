@@ -1,6 +1,6 @@
 {
 	"required": true,
-	"package": "com.neoz_enderlink.client.mixin",
+	"package": "io.github.neozmmv.enderlink.client.mixin",
 	"compatibilityLevel": "JAVA_25",
 	"client": [
 		"ExampleClientMixin"

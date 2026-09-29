@@ -17,13 +17,13 @@
 	"entrypoints": {
 		"main": [
 			{
-				"value": "com.neoz_enderlink.Neoz_Enderlink",
+				"value": "io.github.neozmmv.enderlink.Neoz_Enderlink",
 				"adapter": "kotlin"
 			}
 		],
 		"client": [
 			{
-				"value": "com.neoz_enderlink.client.Neoz_EnderlinkClient",
+				"value": "io.github.neozmmv.enderlink.client.Neoz_EnderlinkClient",
 				"adapter": "kotlin"
 			}
 		]

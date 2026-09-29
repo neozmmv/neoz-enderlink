@@ -1,4 +1,4 @@
-package com.neoz_enderlink.client
+package io.github.neozmmv.enderlink.client
 
 import net.fabricmc.api.ClientModInitializer
 

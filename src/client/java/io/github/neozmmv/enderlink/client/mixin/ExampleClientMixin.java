@@ -1,4 +1,4 @@
-package com.neoz_enderlink.client.mixin;
+package io.github.neozmmv.enderlink.client.mixin;
 
 import net.minecraft.client.Minecraft;
 import org.spongepowered.asm.mixin.Mixin;
