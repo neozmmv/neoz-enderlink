@@ -1,8 +1,8 @@
 {
-	"neoz_enderlink.options.iroh": "Share via Iroh",
-	"neoz_enderlink.options.iroh.tooltip": "Lets players anywhere join with your iroh key (Multiplayer → Direct Connection), no port forwarding needed.",
-	"neoz_enderlink.options.iroh.disabled.tooltip": "Turn on LAN to share the world via iroh.",
-	"neoz_enderlink.iroh.started": "World shared via iroh. Key: %s",
-	"neoz_enderlink.iroh.stopped": "World no longer shared via iroh",
-	"neoz_enderlink.iroh.failed": "Could not share the world via iroh, see the log for details"
+	"neoz_enderlink.options.iroh": "Share via Enderlink",
+	"neoz_enderlink.options.iroh.tooltip": "Lets players anywhere join with your Enderlink key (Multiplayer → Direct Connection), no port forwarding needed.",
+	"neoz_enderlink.options.iroh.disabled.tooltip": "Turn on LAN to share the world via Enderlink.",
+	"neoz_enderlink.iroh.started": "World shared via Enderlink. Key: %s",
+	"neoz_enderlink.iroh.stopped": "World no longer shared via Enderlink",
+	"neoz_enderlink.iroh.failed": "Could not share the world via Enderlink, see the log for details"
 }

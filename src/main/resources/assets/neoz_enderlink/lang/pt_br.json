@@ -1,0 +1,8 @@
+{
+	"neoz_enderlink.options.iroh": "Compartilhar via Enderlink",
+	"neoz_enderlink.options.iroh.tooltip": "Permite jogadores em qualquer lugar entrarem no seu mundo pela sua chave Enderlink (Multiplayer → Conexão Direta)",
+	"neoz_enderlink.options.iroh.disabled.tooltip": "Ative LAN para compartilhar o mundo com Enderlink",
+	"neoz_enderlink.iroh.started": "Mundo compartilhado por Enderlink. Chave: %s",
+	"neoz_enderlink.iroh.stopped": "Mundo deixou de ser compartilhado por Enderlink.",
+	"neoz_enderlink.iroh.failed": "Não foi possível compartilhar o mundo com Enderlink, veja os logs para mais detalhes."
+}
