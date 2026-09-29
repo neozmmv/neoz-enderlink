@@ -4,7 +4,7 @@ import net.fabricmc.api.ModInitializer
 import net.minecraft.resources.Identifier
 import org.slf4j.LoggerFactory
 
-object Neoz_Enderlink : ModInitializer {
+object Enderlink : ModInitializer {
 	const val MOD_ID: String = "neoz_enderlink"
 
 	private val LOGGER = LoggerFactory.getLogger(MOD_ID)
