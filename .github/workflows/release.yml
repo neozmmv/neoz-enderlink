@@ -1,0 +1,40 @@
+# Builds the mod and publishes it as a GitHub release whenever a tag is pushed.
+# The tag (minus a leading "v") becomes the mod version, e.g. tag v1.2.0 -> neoz_enderlink-1.2.0.jar
+
+name: release
+on:
+  push:
+    tags:
+      - '*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v6
+      - name: validate gradle wrapper
+        uses: gradle/actions/wrapper-validation@v6
+      - name: setup jdk
+        uses: actions/setup-java@v5
+        with:
+          java-version: '25'
+          distribution: 'microsoft'
+      - name: make gradle wrapper executable
+        run: chmod +x ./gradlew
+      - name: build
+        env:
+          TAG: ${{ github.ref_name }}
+        run: ./gradlew build -Pversion="${TAG#v}"
+      - name: publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          gh release create "$TAG" "build/libs/neoz_enderlink-${TAG#v}.jar" \
+            --verify-tag \
+            --title "Neoz's Enderlink $TAG" \
+            --generate-notes
