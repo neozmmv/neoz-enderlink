@@ -2,14 +2,15 @@
 	"schemaVersion": 1,
 	"id": "neoz_enderlink",
 	"version": "${version}",
-	"name": "Neoz_Enderlink",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"name": "Neoz's Enderlink",
+	"description": "Share your singleplayer world with friends anywhere over the internet. Turn on Share via Enderlink next to the LAN option and give them your key, no port forwarding needed. Powered by iroh.",
 	"authors": [
-		"Me!"
+		"neozmmv"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://github.com/neozmmv/neoz-enderlink",
+		"sources": "https://github.com/neozmmv/neoz-enderlink",
+		"issues": "https://github.com/neozmmv/neoz-enderlink/issues"
 	},
 	"license": "CC0-1.0",
 	"icon": "assets/neoz_enderlink/icon.png",
