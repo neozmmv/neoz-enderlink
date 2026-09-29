@@ -1,9 +1,6 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
 plugins {
 	id("net.fabricmc.fabric-loom")
 	`maven-publish`
-	id("org.jetbrains.kotlin.jvm") version "2.4.20"
 }
 
 repositories {
@@ -12,6 +9,7 @@ repositories {
 	// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
 	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
 	// for more information about repositories.
+	mavenCentral()
 }
 
 loom {
@@ -23,6 +21,13 @@ loom {
 			sourceSet(sourceSets.getByName("client"))
 		}
 	}
+
+	runs {
+		configureEach {
+			// iroh loads its native library through JNA; silences Java's restricted-method warning
+			vmArg("--enable-native-access=ALL-UNNAMED")
+		}
+	}
 }
 
 dependencies {
@@ -32,7 +37,21 @@ dependencies {
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	implementation("net.fabricmc.fabric-api:fabric-api:${providers.gradleProperty("fabric_api_version").get()}")
-    implementation("net.fabricmc:fabric-language-kotlin:${providers.gradleProperty("fabric_kotlin_version").get()}")
+
+	// iroh (https://iroh.computer) - published as Kotlin bindings with bundled native libraries.
+	// It is called from Java, so its Kotlin runtime has to ship inside our jar (`include`).
+	// JNA is intentionally not included: Minecraft already provides it.
+	val irohVersion = providers.gradleProperty("iroh_version").get()
+	val kotlinStdlibVersion = providers.gradleProperty("kotlin_stdlib_version").get()
+	val kotlinxCoroutinesVersion = providers.gradleProperty("kotlinx_coroutines_version").get()
+
+	implementation("computer.iroh:iroh:$irohVersion")
+	implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinStdlibVersion")
+	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:$kotlinxCoroutinesVersion")
+
+	include("computer.iroh:iroh:$irohVersion")
+	include("org.jetbrains.kotlin:kotlin-stdlib:$kotlinStdlibVersion")
+	include("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:$kotlinxCoroutinesVersion")
 }
 
 tasks.processResources {
@@ -46,12 +65,6 @@ tasks.processResources {
 
 tasks.withType<JavaCompile>().configureEach {
 	options.release = 25
-}
-
-kotlin {
-	compilerOptions {
-		jvmTarget = JvmTarget.JVM_25
-	}
 }
 
 java {
