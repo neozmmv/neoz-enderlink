@@ -29,7 +29,7 @@ public final class IrohAsync {
 	/** A call to a Kotlin suspend function, forwarding the continuation it is given. */
 	@FunctionalInterface
 	public interface SuspendCall<T> {
-		Object invoke(Continuation<? super T> continuation) throws Exception;
+		Object invoke(Continuation<? super T> continuation) throws Throwable;
 	}
 
 	/**
@@ -48,8 +48,8 @@ public final class IrohAsync {
 		return FutureKt.future(SCOPE, EmptyCoroutineContext.INSTANCE, CoroutineStart.DEFAULT, (scope, continuation) -> {
 			try {
 				return call.invoke(continuation);
-			} catch (Exception e) {
-				throw sneakyThrow(e);
+			} catch (Throwable t) {
+				throw sneakyThrow(t);
 			}
 		});
 	}

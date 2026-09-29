@@ -27,6 +27,14 @@ loom {
 			// iroh loads its native library through JNA; silences Java's restricted-method warning
 			vmArg("--enable-native-access=ALL-UNNAMED")
 		}
+
+		// A second client with its own game dir (and so its own iroh key), for testing joins on one machine
+		register("client2") {
+			client()
+			configName = "Minecraft Client 2"
+			runDir("run2")
+			programArgs("--username", "Player2")
+		}
 	}
 }
 

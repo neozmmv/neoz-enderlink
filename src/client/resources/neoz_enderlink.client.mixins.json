@@ -3,7 +3,10 @@
 	"package": "io.github.neozmmv.enderlink.client.mixin",
 	"compatibilityLevel": "JAVA_25",
 	"client": [
-		"ExampleClientMixin"
+		"ExampleClientMixin",
+		"IntegratedServerMixin",
+		"ServerNameResolverMixin",
+		"WorldOptionsScreenMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
