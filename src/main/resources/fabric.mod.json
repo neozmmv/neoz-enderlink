@@ -32,11 +32,15 @@
 		{
 			"config": "neoz_enderlink.client.mixins.json",
 			"environment": "client"
+		},
+		{
+			"config": "neoz_enderlink.client.version.mixins.json",
+			"environment": "client"
 		}
 	],
 	"depends": {
 		"fabricloader": ">=0.19.5",
-		"minecraft": "~26.3",
+		"minecraft": "${minecraft_dependency}",
 		"java": ">=25",
 		"fabric-api": "*"
 	}

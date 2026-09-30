@@ -14,7 +14,19 @@ repositories {
 
 loom {
 	splitEnvironmentSourceSets()
+}
 
+// Code that differs between Minecraft versions (mostly the LAN screen UI) lives in
+// src/client/versions/<major.minor>; only the folder matching minecraft_version is compiled.
+val versionSourceDir = "src/client/versions/" +
+	providers.gradleProperty("minecraft_version").get().split(".").take(2).joinToString(".")
+
+sourceSets.named("client") {
+	java.srcDir("$versionSourceDir/java")
+	resources.srcDir("$versionSourceDir/resources")
+}
+
+loom {
 	mods {
 		register("neoz_enderlink") {
 			sourceSet(sourceSets.main.get())
@@ -64,10 +76,12 @@ dependencies {
 
 tasks.processResources {
 	val version = version
+	val minecraftDependency = providers.gradleProperty("minecraft_dependency").get()
 	inputs.property("version", version)
+	inputs.property("minecraftDependency", minecraftDependency)
 
 	filesMatching("fabric.mod.json") {
-		expand("version" to version)
+		expand("version" to version, "minecraft_dependency" to minecraftDependency)
 	}
 }
 

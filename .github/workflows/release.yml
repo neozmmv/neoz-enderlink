@@ -1,5 +1,6 @@
-# Builds the mod and publishes it as a GitHub release whenever a tag is pushed.
-# The tag (minus a leading "v") becomes the mod version, e.g. tag v1.2.0 -> neoz_enderlink-1.2.0.jar
+# Builds the mod for every supported Minecraft version and publishes the jars as one GitHub release
+# whenever a tag is pushed. The tag (minus a leading "v") becomes the mod version, suffixed with the
+# Minecraft version, e.g. tag v1.2.0 -> neoz_enderlink-1.2.0+26.1.jar, neoz_enderlink-1.2.0+26.2.jar, ...
 
 name: release
 on:
@@ -11,8 +12,22 @@ permissions:
   contents: write
 
 jobs:
-  release:
+  build:
     runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        # Versions for each target: check them on https://fabricmc.net/develop
+        # Code specific to one target lives in src/client/versions/<label>
+        include:
+          - label: '26.1'
+            minecraft_version: '26.1.2'
+            fabric_api_version: '0.155.3+26.1.2'
+          - label: '26.2'
+            minecraft_version: '26.2'
+            fabric_api_version: '0.161.0+26.2'
+          - label: '26.3'
+            minecraft_version: '26.3'
+            fabric_api_version: '0.161.0+26.3'
     steps:
       - name: checkout repository
         uses: actions/checkout@v6
@@ -28,13 +43,37 @@ jobs:
       - name: build
         env:
           TAG: ${{ github.ref_name }}
-        run: ./gradlew build -Pversion="${TAG#v}"
+        run: |
+          ./gradlew build \
+            -Pversion="${TAG#v}+${{ matrix.label }}" \
+            -Pminecraft_version="${{ matrix.minecraft_version }}" \
+            -Pminecraft_dependency="~${{ matrix.label }}" \
+            -Pfabric_api_version="${{ matrix.fabric_api_version }}"
+      - name: upload jar
+        uses: actions/upload-artifact@v7
+        with:
+          name: jar-${{ matrix.label }}
+          path: build/libs/neoz_enderlink-*+${{ matrix.label }}.jar
+          if-no-files-found: error
+
+  release:
+    needs: build
+    runs-on: ubuntu-24.04
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v6
+      - name: download jars
+        uses: actions/download-artifact@v8
+        with:
+          pattern: jar-*
+          path: jars
+          merge-multiple: true
       - name: publish release
         env:
           GH_TOKEN: ${{ github.token }}
           TAG: ${{ github.ref_name }}
         run: |
-          gh release create "$TAG" "build/libs/neoz_enderlink-${TAG#v}.jar" \
+          gh release create "$TAG" jars/*.jar \
             --verify-tag \
             --title "Neoz's Enderlink $TAG" \
             --generate-notes

@@ -9,7 +9,7 @@ Your friends paste it into *Direct Connection* and join, like an Ender Pearl thr
 
 [![Release](https://img.shields.io/github/v/release/neozmmv/neoz-enderlink?style=for-the-badge&color=8a2be2)](https://github.com/neozmmv/neoz-enderlink/releases)
 [![Build](https://img.shields.io/github/actions/workflow/status/neozmmv/neoz-enderlink/build.yml?style=for-the-badge)](https://github.com/neozmmv/neoz-enderlink/actions)
-![Minecraft](https://img.shields.io/badge/Minecraft-26.3-62b47a?style=for-the-badge)
+![Minecraft](https://img.shields.io/badge/Minecraft-26.1%20%7C%2026.2%20%7C%2026.3-62b47a?style=for-the-badge)
 ![Fabric](https://img.shields.io/badge/Loader-Fabric-dbd0b4?style=for-the-badge)
 ![Java](https://img.shields.io/badge/Java-25-e76f00?style=for-the-badge)
 
@@ -29,9 +29,9 @@ Vanilla *Open to LAN* only works for people on your local network. **Enderlink**
 
 ## Installation
 
-1. Install [Fabric Loader](https://fabricmc.net/use/) for **Minecraft 26.3**.
+1. Install [Fabric Loader](https://fabricmc.net/use/) for **Minecraft 26.1, 26.2 or 26.3**.
 2. Drop [Fabric API](https://modrinth.com/mod/fabric-api) into your `mods` folder.
-3. Download the latest `neoz_enderlink-x.y.z.jar` from [**Releases**](https://github.com/neozmmv/neoz-enderlink/releases) and put it in `mods` too.
+3. Download the latest `neoz_enderlink-x.y.z+<minecraft version>.jar` matching your game version from [**Releases**](https://github.com/neozmmv/neoz-enderlink/releases) and put it in `mods` too.
 
 That's it: iroh and its Kotlin runtime are bundled inside the jar. Both the host and the players joining need the mod.
 
